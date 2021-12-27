@@ -60,6 +60,16 @@
   "directories": {
     "dist": "dist"
   },
+  "clean-publish": {
+    "packageManager": "yarn",
+    "fields": [
+      "scripts",
+      "packageManager"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@foxkit/eslint-config": "^1.0.2",
     "@foxkit/internal": "^2.1.0",
