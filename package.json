@@ -1,15 +1,31 @@
 {
-  "name": "@foxkit/util-modules",
+  "name": "@foxkit/node-util",
   "version": "0.0.0",
   "description": "Nodejs Utility ES Modules",
   "main": "index.js",
-  "repository": "git@github.com:foxkit-js/foxkit-util-modules.git",
+  "repository": "git@github.com:foxkit-js/node-util.git",
   "author": "Mitsunee",
   "license": "MIT",
   "type": "module",
+  "packageManager": "yarn",
   "exports": {
+    "./fetch": {
+      "import": "./dist/fetch/index.js"
+    },
     "./fs": {
-      "import": "./dist/index.js"
+      "import": "./dist/fs/index.js"
+    },
+    "./fs-yaml": {
+      "import": "./dist/fs-yaml/index.js"
+    },
+    "./log": {
+      "import": "./dist/log/index.js"
+    },
+    "./path": {
+      "import": "./dist/path/index.js"
+    },
+    "./readline": {
+      "import": "./dist/readline/index.js"
     }
   },
   "scripts": {
@@ -17,7 +33,7 @@
     "format": "prettier -w .",
     "prebuild": "eslint src/**",
     "build": "rollup -c",
-    "postbuild": "mocha",
+    "postbuild": "echo 'No Tests yet'",
     "prepare": "simple-git-hooks",
     "dev": "rollup -c -w",
     "publish": "yarn build && clean-publish --fields scripts --files src"
@@ -48,12 +64,28 @@
     "@foxkit/eslint-config": "^1.0.2",
     "@foxkit/internal": "^2.1.0",
     "clean-publish": "^3.4.4",
-    "eslint": "^8.5.0",
+    "eslint": "7",
     "eslint-config-prettier": "^8.3.0",
     "lint-staged": "^12.1.4",
     "mocha": "^9.1.3",
     "prettier": "^2.5.1",
     "rollup": "^2.62.0",
     "simple-git-hooks": "^2.7.0"
+  },
+  "peerDependencies": {
+    "node-fetch": "^3.1.0",
+    "picocolors": "^1.0.0",
+    "yaml": "^1.10.2"
+  },
+  "peerDependenciesMeta": {
+    "node-fetch": {
+      "optional": true
+    },
+    "picocolors": {
+      "optional": true
+    },
+    "yaml": {
+      "optional": true
+    }
   }
 }
