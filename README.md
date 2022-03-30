@@ -1,3 +1,7 @@
+# MOVED
+
+<div align="center">⚠️ This package has been moved and is now part of the [foxkit monorepo](https://github.com/Mitsunee/foxkit/tree/main/packages/node-util) ⚠️</div>
+
 # @foxkit/node-util
 
 This packages contains variety of helper functions for Nodejs ESM projects.
