@@ -1,6 +1,6 @@
 # MOVED
 
-<div align="center">⚠️ This package has been moved and is now part of the [foxkit monorepo](https://github.com/Mitsunee/foxkit/tree/main/packages/node-util) ⚠️</div>
+⚠️ This package has been moved and is now part of the [foxkit monorepo](https://github.com/Mitsunee/foxkit/tree/main/packages/node-util) ⚠️
 
 # @foxkit/node-util
 
