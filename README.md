@@ -1,7 +1,3 @@
-# MOVED
-
-⚠️ This package has been moved and is now part of the [foxkit monorepo](https://github.com/Mitsunee/foxkit/tree/main/packages/node-util) ⚠️
-
 # @foxkit/node-util
 
 This packages contains variety of helper functions for Nodejs ESM projects.
@@ -23,7 +19,6 @@ Documentation is WIP.
 Peer depenencies are all marked as optional. Install them manually if you use any of the following packages:
 
 - `fs-yaml` requires `yaml`
-- `fetch` requires `node-fetch`
 - `log` requires `picocolors`
 
 ## Other Modules

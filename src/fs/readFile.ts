@@ -1,8 +1,8 @@
-import fs from "fs/promises";
+import { readFile } from "fs/promises";
 import { fileExists } from "./fileExists.js";
 import { resolvePath } from "../path/resolvePath.js";
 
-export async function readFile(filePath) {
+async function fk_readFile(filePath: string) {
   // check that file exists
   if (!fileExists(filePath)) {
     return false;
@@ -10,8 +10,10 @@ export async function readFile(filePath) {
 
   // read file
   try {
-    return await fs.readFile(resolvePath(filePath), "utf8");
+    return await readFile(resolvePath(filePath), "utf8");
   } catch {
     return false;
   }
 }
+
+export { fk_readFile as readFile };

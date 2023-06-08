@@ -1,55 +1,67 @@
 {
   "name": "@foxkit/node-util",
-  "version": "0.2.0",
-  "description": "Nodejs Utility ES Modules",
-  "main": "index.js",
-  "repository": "git@github.com:foxkit-js/node-util.git",
+  "version": "0.4.0",
+  "description": "Node.js Utility Modules",
+  "keywords": [
+    "fs",
+    "path",
+    "utils",
+    "foxkit"
+  ],
+  "repository": "foxkit-js/node-util",
   "author": "Mitsunee",
   "license": "MIT",
   "type": "module",
-  "packageManager": "yarn",
   "exports": {
-    "./fetch": {
-      "import": "./dist/fetch/index.js"
-    },
     "./fs": {
-      "import": "./dist/fs/index.js"
+      "types": "./fs.d.ts",
+      "import": "./dist/fs.js",
+      "require": "./dist/fs.cjs"
     },
     "./fs-yaml": {
-      "import": "./dist/fs-yaml/index.js"
+      "types": "./fs-yaml.d.ts",
+      "import": "./dist/fs-yaml.js",
+      "require": "./dist/fs-yaml.cjs"
     },
     "./log": {
-      "import": "./dist/log/index.js"
+      "types": "./log.d.ts",
+      "import": "./dist/log.js",
+      "require": "./dist/log.cjs"
     },
     "./path": {
-      "import": "./dist/path/index.js"
+      "types": "./path.d.ts",
+      "import": "./dist/path.js",
+      "require": "./dist/path.cjs"
     },
     "./readline": {
-      "import": "./dist/readline/index.js"
+      "types": "./readline.d.ts",
+      "import": "./dist/readline.js",
+      "require": "./dist/readline.cjs"
     }
   },
   "scripts": {
-    "lint": "eslint .",
     "format": "prettier -w .",
-    "prebuild": "eslint src/**",
+    "lint": "eslint .",
+    "test": "tsc --noEmit",
+    "prebuild": "yarn lint && yarn test",
     "build": "rollup -c",
-    "postbuild": "echo 'No Tests yet'",
-    "prepare": "simple-git-hooks",
+    "postbuild": "tsc --declaration --emitDeclarationOnly",
     "dev": "rollup -c -w",
-    "publish": "yarn build && clean-publish --fields scripts --files src"
+    "publish": "yarn build && clean-publish"
   },
   "eslintConfig": {
-    "extends": "@foxkit"
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "extends": [
+      "eslint:recommended",
+      "foxkit",
+      "foxkit/ts",
+      "prettier"
+    ]
   },
-  "prettier": "@foxkit/internal/prettier",
-  "browserslist": [
-    "maintained node versions"
-  ],
-  "simple-git-hooks": {
-    "pre-commit": "yarn lint-staged"
-  },
-  "lint-staged": {
-    "**/*.js": [
+  "nano-staged": {
+    "**/*.{js,ts}": [
       "eslint",
       "prettier -w"
     ],
@@ -57,45 +69,63 @@
       "prettier -w"
     ]
   },
-  "directories": {
-    "dist": "dist"
-  },
+  "files": [
+    "dist/",
+    "fs.d.ts",
+    "fs-yaml.d.ts",
+    "log.d.ts",
+    "path.d.ts",
+    "readline.d.ts"
+  ],
   "clean-publish": {
+    "withoutPublish": true,
+    "tempDir": "publish",
     "packageManager": "yarn",
     "fields": [
       "scripts",
-      "packageManager"
+      "packageManager",
+      "nano-staged"
+    ],
+    "files": [
+      "babel.config.json",
+      "src",
+      "rollup.config.mjs",
+      "tsconfig.json"
     ]
   },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
-    "@foxkit/eslint-config": "^1.0.2",
-    "@foxkit/internal": "^2.1.0",
-    "clean-publish": "^3.4.4",
-    "eslint": "7",
-    "eslint-config-prettier": "^8.3.0",
-    "lint-staged": "^12.1.4",
-    "mocha": "^9.1.3",
-    "prettier": "^2.5.1",
-    "rollup": "^2.62.0",
-    "simple-git-hooks": "^2.7.0"
+    "@babel/core": "^7.19.3",
+    "@babel/preset-typescript": "^7.18.6",
+    "@foxkit/rollup-config": "*",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@types/node": "^20.2.5",
+    "@typescript-eslint/eslint-plugin": "^5.38.1",
+    "@typescript-eslint/parser": "^5.38.1",
+    "clean-publish": "^4.0.0",
+    "eslint": "^8.24.0",
+    "eslint-config-foxkit": "*",
+    "eslint-config-prettier": "^8.5.0",
+    "nano-staged": "^0.8.0",
+    "prettier": "^2.6.1",
+    "rollup": "2",
+    "typescript": "5.0",
+    "yaml": "^2.1.1"
   },
   "peerDependencies": {
-    "node-fetch": "^3.1.0",
-    "picocolors": "^1.0.0",
-    "yaml": "^1.10.2"
+    "picocolors": ">=1.0.0",
+    "yaml": ">=2.1.0"
   },
   "peerDependenciesMeta": {
-    "node-fetch": {
-      "optional": true
-    },
     "picocolors": {
       "optional": true
     },
     "yaml": {
       "optional": true
     }
-  }
+  },
+  "dependencies": {}
 }

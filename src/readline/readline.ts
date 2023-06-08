@@ -1,25 +1,28 @@
 import { createInterface } from "readline";
 
+type OptionsItem = string | { value?: any; label?: string };
+type Options = OptionsItem[];
+
 export function readline() {
   const rl = createInterface({
     input: process.stdin,
     output: process.stdout
   });
 
-  const question = prompt => {
-    return new Promise(resolve => {
+  const question = (prompt: string) => {
+    return new Promise<string>(resolve => {
       rl.question(`${prompt}: `, input => resolve(input.trim()));
     });
   };
 
-  const menu = async (options, text = "Choose Option") => {
-    function getValue(item) {
+  const menu = async (options: Options, text = "Choose Option") => {
+    function getValue(item: OptionsItem) {
       if (typeof item !== "object") return item;
       if (item.value === undefined) return item;
       return item.value;
     }
 
-    function getLabel(item) {
+    function getLabel(item: OptionsItem) {
       if (typeof item !== "object") return item;
       if (item.label === undefined) return item;
       return `${item.label}`;
@@ -30,7 +33,9 @@ export function readline() {
       return getValue(options[0]);
     }
 
-    const list = options.map((option, idx) => `  ${idx}) ${getLabel(option)}`);
+    const list = options.map(
+      (option, idx: number) => `  ${idx}) ${getLabel(option)}`
+    );
     const input = await question(
       `\n${text}:\n${list.join("\n")}\nOption (0-${list.length - 1})`
     );

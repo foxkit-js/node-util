@@ -1,6 +1,6 @@
 import { join, isAbsolute } from "path";
 
-export function resolvePath(filePath, ...morePaths) {
+export function resolvePath(filePath: string, ...morePaths: string[]): string {
   if (morePaths.length > 0) {
     const basePath = resolvePath(filePath);
     return join(basePath, ...morePaths);
