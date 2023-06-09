@@ -1,7 +1,7 @@
 import YAML from "yaml";
 import { readFile } from "../fs/readFile";
 
-export async function readFileYaml<FileType>(
+export async function readFileYaml<FileType = unknown>(
   filePath: string
 ): Promise<false | FileType> {
   try {

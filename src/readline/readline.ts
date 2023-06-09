@@ -1,5 +1,6 @@
 import { createInterface } from "readline";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type OptionsItem = string | { value?: any; label?: string };
 type Options = OptionsItem[];
 

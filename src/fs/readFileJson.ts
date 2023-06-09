@@ -1,6 +1,6 @@
 import { readFile } from "./readFile";
 
-export async function readFileJson<FileType>(
+export async function readFileJson<FileType = unknown>(
   filePath: string
 ): Promise<false | FileType> {
   try {

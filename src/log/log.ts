@@ -2,7 +2,7 @@ import picocolors from "picocolors";
 
 type LogLevel = "log" | "warn" | "error" | "table";
 
-const log = (text: any, level: LogLevel = "log") => {
+const log = (text: unknown, level: LogLevel = "log") => {
   console[level](typeof text === "object" ? text : `[LOG] ${text}`);
 };
 
@@ -14,8 +14,9 @@ log.completed = (text: string) =>
 log.success = (text: string) => console.log(picocolors.green(`[DONE] ${text}`));
 
 // info table logger
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 log.table = (arg: any) => {
-  if (typeof arg !== "object") {
+  if (typeof arg !== "object" || arg === null) {
     return log(arg);
   }
 

@@ -13,107 +13,90 @@
   "license": "MIT",
   "type": "module",
   "exports": {
-    "./fs": {
-      "types": "./fs.d.ts",
-      "import": "./dist/fs.js",
-      "require": "./dist/fs.cjs"
-    },
-    "./fs-yaml": {
-      "types": "./fs-yaml.d.ts",
-      "import": "./dist/fs-yaml.js",
-      "require": "./dist/fs-yaml.cjs"
-    },
-    "./log": {
-      "types": "./log.d.ts",
-      "import": "./dist/log.js",
-      "require": "./dist/log.cjs"
-    },
-    "./path": {
-      "types": "./path.d.ts",
-      "import": "./dist/path.js",
-      "require": "./dist/path.cjs"
-    },
-    "./readline": {
-      "types": "./readline.d.ts",
-      "import": "./dist/readline.js",
-      "require": "./dist/readline.cjs"
-    }
+    "./fs": "./src/fs/index.ts",
+    "./fs-yaml": "./src/fs-yaml/index.ts",
+    "./log": "./src/log/index.ts",
+    "./path": "./src/path/index.ts",
+    "./readline": "./src/readline/index.ts"
   },
   "scripts": {
+    "prepare": "simple-git-hooks",
     "format": "prettier -w .",
+    "format:check": "prettier -c .",
     "lint": "eslint .",
-    "test": "tsc --noEmit",
-    "prebuild": "yarn lint && yarn test",
-    "build": "rollup -c",
-    "postbuild": "tsc --declaration --emitDeclarationOnly",
-    "dev": "rollup -c -w",
-    "publish": "yarn build && clean-publish"
-  },
-  "eslintConfig": {
-    "parserOptions": {
-      "sourceType": "module"
-    },
-    "extends": [
-      "eslint:recommended",
-      "foxkit",
-      "foxkit/ts",
-      "prettier"
-    ]
+    "lint:strict": "eslint --max-warnings 0 .",
+    "typecheck": "tsc --noEmit",
+    "build": "node build.js && tsc -p tsconfig.build.json && clear-package-json package.json -o dist/package.json"
   },
   "nano-staged": {
-    "**/*.{js,ts}": [
-      "eslint",
-      "prettier -w"
-    ],
-    "**/*.{json,md}": [
+    "**/*.{js,cjs,mjs,ts,mts,cts,json,md,yaml}": [
       "prettier -w"
     ]
   },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm nano-staged"
+  },
   "files": [
-    "dist/",
-    "fs.d.ts",
-    "fs-yaml.d.ts",
-    "log.d.ts",
-    "path.d.ts",
-    "readline.d.ts"
+    "fs/",
+    "fs-yaml/",
+    "log/",
+    "path/",
+    "readline/"
   ],
   "clean-publish": {
+    "packageManager": "pnpm",
     "withoutPublish": true,
-    "tempDir": "publish",
-    "packageManager": "yarn",
+    "tempDir": "dist",
     "fields": [
       "scripts",
-      "packageManager",
-      "nano-staged"
-    ],
-    "files": [
-      "babel.config.json",
-      "src",
-      "rollup.config.mjs",
-      "tsconfig.json"
+      "nano-staged",
+      "simple-git-hooks"
     ]
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "exports": {
+      "./fs": {
+        "types": "./fs/index.d.ts",
+        "import": "./fs/index.js",
+        "require": "./fs/index.cjs"
+      },
+      "./fs-yaml": {
+        "types": "./fs-yaml/index.d.ts",
+        "import": "./fs-yaml/index.js",
+        "require": "./fs-yaml/index.cjs"
+      },
+      "./log": {
+        "types": "./log/index.d.ts",
+        "import": "./log/index.js",
+        "require": "./log/index.cjs"
+      },
+      "./path": {
+        "types": "./path/index.d.ts",
+        "import": "./path/index.js",
+        "require": "./path/index.cjs"
+      },
+      "./readline": {
+        "types": "./readline/index.d.ts",
+        "import": "./readline/index.js",
+        "require": "./readline/index.cjs"
+      }
+    }
   },
   "devDependencies": {
-    "@babel/core": "^7.19.3",
-    "@babel/preset-typescript": "^7.18.6",
-    "@foxkit/rollup-config": "*",
-    "@rollup/plugin-babel": "^6.0.3",
-    "@rollup/plugin-node-resolve": "^15.1.0",
     "@types/node": "^20.2.5",
-    "@typescript-eslint/eslint-plugin": "^5.38.1",
-    "@typescript-eslint/parser": "^5.38.1",
-    "clean-publish": "^4.0.0",
-    "eslint": "^8.24.0",
-    "eslint-config-foxkit": "*",
+    "@typescript-eslint/eslint-plugin": "^5.59.9",
+    "@typescript-eslint/parser": "^5.59.9",
+    "clean-publish": "^4.2.0",
+    "esbuild": "^0.17.19",
+    "eslint": "^8.42.0",
+    "eslint-config-foxkit": "3.0.0-next",
     "eslint-config-prettier": "^8.5.0",
     "nano-staged": "^0.8.0",
-    "prettier": "^2.6.1",
-    "rollup": "2",
+    "prettier": "^2.8.8",
+    "simple-git-hooks": "^2.8.1",
     "typescript": "5.0",
-    "yaml": "^2.1.1"
+    "yaml": "^2.3.1"
   },
   "peerDependencies": {
     "picocolors": ">=1.0.0",
@@ -126,6 +109,5 @@
     "yaml": {
       "optional": true
     }
-  },
-  "dependencies": {}
+  }
 }

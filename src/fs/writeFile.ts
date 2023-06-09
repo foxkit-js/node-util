@@ -4,7 +4,7 @@ import { dirExists } from "./dirExists";
 import { makeDir } from "./makeDir";
 import { resolvePath } from "../path/resolvePath";
 
-async function fk_writeFile(filePath: string, content: any) {
+async function fk_writeFile(filePath: string, content: unknown) {
   if (content === undefined || content === null) return;
 
   // prep directory
