@@ -1,0 +1,23 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base"],
+  "addLabels": ["dependencies"],
+  "assignees": ["Mitsunee"],
+  "commitMessageAction": "update:",
+  "commitMessageTopic": "{{depName}}",
+  "schedule": ["on monday"],
+  "timezone": "Europe/Berlin",
+  "semanticCommits": "disabled",
+  "postUpdateOptions": ["pnpmDedupe"],
+  "branchTopic": "{{{depNameSanitized}}}-{{{newMajor}}}{{#if separateMinorPatch}}{{#if isPatch}}.{{{newMinor}}}{{/if}}{{/if}}.x",
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["^@?eslint"],
+      "groupName": "eslint"
+    },
+    {
+      "matchPackagePatterns": ["^@typescript-eslint"],
+      "groupName": "typescript-eslint"
+    }
+  ]
+}
