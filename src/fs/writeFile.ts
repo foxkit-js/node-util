@@ -1,7 +1,6 @@
-import { writeFile } from "fs/promises";
+import { writeFile, mkdir } from "fs/promises";
 import { dirname } from "path";
-import { dirExists } from "./dirExists";
-import { makeDir } from "./makeDir";
+import { isDirectory } from "./isDirectory";
 import { resolvePath } from "../path/resolvePath";
 
 async function fk_writeFile(filePath: string, content: unknown) {
@@ -9,8 +8,8 @@ async function fk_writeFile(filePath: string, content: unknown) {
 
   // prep directory
   const dirPath = dirname(filePath);
-  if (!(await dirExists(dirPath))) {
-    await makeDir(dirPath);
+  if (!(await isDirectory(dirPath))) {
+    await mkdir(dirPath, { recursive: true });
   }
 
   // write File

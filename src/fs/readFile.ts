@@ -1,10 +1,10 @@
 import { readFile } from "fs/promises";
-import { fileExists } from "./fileExists.js";
+import { isFile } from "./isFile.js";
 import { resolvePath } from "../path/resolvePath.js";
 
 async function fk_readFile(filePath: string) {
   // check that file exists
-  if (!fileExists(filePath)) {
+  if (!isFile(filePath)) {
     return false;
   }
 
