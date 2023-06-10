@@ -5,6 +5,7 @@
   "keywords": [
     "fs",
     "path",
+    "json",
     "utils",
     "foxkit"
   ],
@@ -16,7 +17,6 @@
     "./fs": "./src/fs/index.ts",
     "./fs-yaml": "./src/fs-yaml/index.ts",
     "./log": "./src/log/index.ts",
-    "./path": "./src/path/index.ts",
     "./readline": "./src/readline/index.ts"
   },
   "scripts": {
@@ -40,7 +40,6 @@
     "fs/",
     "fs-yaml/",
     "log/",
-    "path/",
     "readline/"
   ],
   "clean-publish": {
@@ -70,11 +69,6 @@
         "types": "./log/index.d.ts",
         "import": "./log/index.js",
         "require": "./log/index.cjs"
-      },
-      "./path": {
-        "types": "./path/index.d.ts",
-        "import": "./path/index.js",
-        "require": "./path/index.cjs"
       },
       "./readline": {
         "types": "./readline/index.d.ts",

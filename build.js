@@ -9,7 +9,6 @@ const config = {
     "src/fs/index.ts",
     "src/fs-yaml/index.ts",
     "src/log/index.ts",
-    "src/path/index.ts",
     "src/readline/index.ts"
   ],
   outdir: "dist",
