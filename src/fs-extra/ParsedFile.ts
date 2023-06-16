@@ -79,7 +79,7 @@ export class ParsedFile<T> {
       const fullPath = path.resolve(filePath);
       if (this.limitPath && !fullPath.startsWith(this.limitPath)) {
         throw new Error(
-          `This parser is limited to '${this.limitPath}' but path '${filePath} was given'`
+          `This parser is limited to '${this.limitPath}' but path '${filePath}' was given`
         );
       }
 
@@ -125,7 +125,7 @@ export class ParsedFile<T> {
       const fullPath = path.resolve(filePath);
       if (this.limitPath && !fullPath.startsWith(this.limitPath)) {
         throw new Error(
-          `This parser is limited to '${this.limitPath}' but path '${filePath} was given'`
+          `This parser is limited to '${this.limitPath}' but path '${filePath}' was given`
         );
       }
 
