@@ -8,7 +8,7 @@ import { isFile } from "./isFile.js";
  */
 export async function readFile(filePath: string) {
   // check that file exists
-  if (!isFile(filePath)) {
+  if (!(await isFile(filePath))) {
     return;
   }
 
