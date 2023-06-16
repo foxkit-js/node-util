@@ -7,7 +7,7 @@ import * as esbuild from "esbuild";
 const config = {
   entryPoints: [
     "src/fs/index.ts",
-    "src/fs-yaml/index.ts",
+    "src/fs-extra/index.ts",
     "src/log/index.ts",
     "src/readline/index.ts"
   ],
