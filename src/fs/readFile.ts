@@ -1,19 +1,21 @@
-import { readFile } from "fs/promises";
-import { fileExists } from "./fileExists.js";
-import { resolvePath } from "../path/resolvePath.js";
+import { readFile as fsReadFile } from "fs/promises";
+import { isFile } from "./isFile.js";
 
-async function fk_readFile(filePath: string) {
+/**
+ * Reads content of a file as string
+ * @param filePath Absolute or relative path to file
+ * @returns File content as string or undefined if the file could not be read
+ */
+export async function readFile(filePath: string) {
   // check that file exists
-  if (!fileExists(filePath)) {
-    return false;
+  if (!(await isFile(filePath))) {
+    return;
   }
 
   // read file
   try {
-    return await readFile(resolvePath(filePath), "utf8");
+    return await fsReadFile(filePath, "utf-8");
   } catch {
-    return false;
+    return;
   }
 }
-
-export { fk_readFile as readFile };

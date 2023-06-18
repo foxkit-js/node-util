@@ -1,27 +1,25 @@
-import { writeFile } from "fs/promises";
+import { writeFile as fsWriteFile, mkdir } from "fs/promises";
 import { dirname } from "path";
-import { dirExists } from "./dirExists";
-import { makeDir } from "./makeDir";
-import { resolvePath } from "../path/resolvePath";
+import { isDirectory } from "./isDirectory";
 
-async function fk_writeFile(filePath: string, content: unknown) {
-  if (content === undefined || content === null) return;
+/**
+ * Writes string to file
+ * @param filePath Absolute or relative path to file
+ * @param content Content to be written to file, non-string values should be stringified first.
+ * @returns `true` or `false` depending on whether the write completed successfully.
+ */
+export async function writeFile(filePath: string, content: string) {
+  try {
+    // prep directory
+    const dirPath = dirname(filePath);
+    if (!(await isDirectory(dirPath))) {
+      await mkdir(dirPath, { recursive: true });
+    }
 
-  // prep directory
-  const dirPath = dirname(filePath);
-  if (!(await dirExists(dirPath))) {
-    await makeDir(dirPath);
+    // write File
+    await fsWriteFile(filePath, content, "utf-8");
+    return true;
+  } catch {
+    return false;
   }
-
-  // write File
-  const fullPath = resolvePath(filePath);
-  if (typeof content === "object") {
-    // write objects as stringified json
-    await writeFile(fullPath, JSON.stringify(content), "utf8");
-    return;
-  }
-
-  await writeFile(fullPath, `${content}`, "utf8");
 }
-
-export { fk_writeFile as writeFile };

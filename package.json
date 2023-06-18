@@ -5,6 +5,7 @@
   "keywords": [
     "fs",
     "path",
+    "json",
     "utils",
     "foxkit"
   ],
@@ -14,9 +15,8 @@
   "type": "module",
   "exports": {
     "./fs": "./src/fs/index.ts",
-    "./fs-yaml": "./src/fs-yaml/index.ts",
+    "./fs-extra": "./src/fs-extra/index.ts",
     "./log": "./src/log/index.ts",
-    "./path": "./src/path/index.ts",
     "./readline": "./src/readline/index.ts"
   },
   "scripts": {
@@ -38,9 +38,8 @@
   },
   "files": [
     "fs/",
-    "fs-yaml/",
+    "fs-extra/",
     "log/",
-    "path/",
     "readline/"
   ],
   "clean-publish": {
@@ -61,20 +60,15 @@
         "import": "./fs/index.js",
         "require": "./fs/index.cjs"
       },
-      "./fs-yaml": {
-        "types": "./fs-yaml/index.d.ts",
-        "import": "./fs-yaml/index.js",
-        "require": "./fs-yaml/index.cjs"
+      "./fs-extra": {
+        "types": "./fs-extra/index.d.ts",
+        "import": "./fs-extra/index.js",
+        "require": "./fs-extra/index.cjs"
       },
       "./log": {
         "types": "./log/index.d.ts",
         "import": "./log/index.js",
         "require": "./log/index.cjs"
-      },
-      "./path": {
-        "types": "./path/index.d.ts",
-        "import": "./path/index.js",
-        "require": "./path/index.cjs"
       },
       "./readline": {
         "types": "./readline/index.d.ts",
@@ -95,18 +89,13 @@
     "nano-staged": "^0.8.0",
     "prettier": "^2.8.8",
     "simple-git-hooks": "^2.8.1",
-    "typescript": "5.0",
-    "yaml": "^2.3.1"
+    "typescript": "5.0"
   },
   "peerDependencies": {
-    "picocolors": ">=1.0.0",
-    "yaml": ">=2.1.0"
+    "picocolors": ">=1.0.0"
   },
   "peerDependenciesMeta": {
     "picocolors": {
-      "optional": true
-    },
-    "yaml": {
       "optional": true
     }
   }

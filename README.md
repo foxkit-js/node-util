@@ -18,7 +18,6 @@ Documentation is WIP.
 
 Peer depenencies are all marked as optional. Install them manually if you use any of the following packages:
 
-- `fs-yaml` requires `yaml`
 - `log` requires `picocolors`
 
 ## Other Modules
