@@ -25,7 +25,7 @@ export function readline() {
 
     function getLabel(item: OptionsItem) {
       if (typeof item !== "object") return item;
-      if (item.label === undefined) return item;
+      if (item.label === undefined) return item.value;
       return `${item.label}`;
     }
 
