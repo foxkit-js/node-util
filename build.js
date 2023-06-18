@@ -14,6 +14,7 @@ const config = {
   outdir: "dist",
   bundle: true,
   platform: "node",
+  target: "es2022",
   packages: "external",
   minify: false
 };
