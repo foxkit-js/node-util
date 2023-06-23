@@ -89,7 +89,7 @@
     "nano-staged": "^0.8.0",
     "prettier": "^2.8.8",
     "simple-git-hooks": "^2.8.1",
-    "typescript": "5.0"
+    "typescript": "5.1"
   },
   "peerDependencies": {
     "picocolors": ">=1.0.0"
