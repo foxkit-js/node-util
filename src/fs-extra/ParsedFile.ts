@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
+import { isDirectory } from "../fs/isDirectory";
 
 type Stringify<T> = (value: T) => string;
 type Parse<T> = (value: string) => T | Promise<T>;
@@ -139,6 +140,12 @@ export class ParsedFile<T> {
             ", "
           )}`
         );
+      }
+
+      // make sure that dir exists
+      const dirPath = path.dirname(fullPath);
+      if (!(await isDirectory(dirPath))) {
+        await fs.mkdir(fullPath, { recursive: true });
       }
 
       // stringify data
