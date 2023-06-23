@@ -187,6 +187,12 @@ export class ParsedFile<T> {
     return files;
   }
 
+  /**
+   * Read and parse all files in a directory
+   * @param dirPath Path to directory
+   * @param options Optional object containing options
+   * @returns Record using paths (relative to `dirPath`) as key for results
+   */
   async readDir(
     dirPath: string,
     options?: ReadDirOptions
