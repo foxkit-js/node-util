@@ -145,7 +145,7 @@ export class ParsedFile<T> {
       // make sure that dir exists
       const dirPath = path.dirname(fullPath);
       if (!(await isDirectory(dirPath))) {
-        await fs.mkdir(fullPath, { recursive: true });
+        await fs.mkdir(dirPath, { recursive: true });
       }
 
       // stringify data
