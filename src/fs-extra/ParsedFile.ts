@@ -9,11 +9,11 @@ interface FileParserOptions<T> {
   /**
    * Function to serialize to string
    */
-  stringify: Stringify<T>;
+  stringify?: Stringify<T>;
   /**
    * Function to parse serialized string
    */
-  parse: Parse<T>;
+  parse?: Parse<T>;
   /**
    * Limit this parser to a specific file or directory
    */
@@ -55,11 +55,20 @@ type ReadDirResult<T> = Partial<Record<string, FileParserResult<T>>>;
  * FileParserOptions for more information
  */
 export class ParsedFile<T> {
-  readonly parse: Parse<T>;
+  readonly parse?: Parse<T>;
   readonly stringify?: Stringify<T>;
   readonly limitPath?: string;
   readonly extensions?: string[];
 
+  /**
+   * Create new ParsedFile instance. To enable reading and parsing files provide
+   * a `parse` method in the options object, same for writing files which
+   * requires a `stringify` method. You can all pass a restriction as to which
+   * directory files need to be in (`limitPath`) and a restriction on file
+   * extensions (`extentions`)
+   *
+   * @param options Options Object
+   */
   constructor(options: FileParserOptions<T>) {
     this.stringify = options.stringify;
     this.parse = options.parse;
@@ -78,6 +87,13 @@ export class ParsedFile<T> {
    */
   async readFile(filePath: string): Promise<FileParserResult<T>> {
     try {
+      // check that reading is supported by this parser
+      if (!this.parse) {
+        throw new Error(
+          `This ParsedFile does not support reading/parsing files and thus cannot perform read operations`
+        );
+      }
+
       // check that file is in specified directory
       const fullPath = path.resolve(filePath);
       if (this.limitPath && !fullPath.startsWith(this.limitPath)) {
@@ -199,6 +215,13 @@ export class ParsedFile<T> {
     dirPath: string,
     options?: ReadDirOptions
   ): Promise<ReadDirResult<T>> {
+    // check that writing is supported by this parser
+    if (!this.parse) {
+      throw new Error(
+        `This parser does not support serialization and thus cannot perform write operations`
+      );
+    }
+
     const recursive = options?.recursive ?? false;
     const files = await this.discoverDir(dirPath, recursive, dirPath);
     const result: ReadDirResult<T> = {};
