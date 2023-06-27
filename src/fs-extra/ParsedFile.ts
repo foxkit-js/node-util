@@ -25,11 +25,13 @@ interface FileParserOptions<T> {
   extensions?: string | string[];
 }
 
-type FileParserResult<T> =
+export type FileParserResult<T> =
   | { success: false; error: unknown }
   | { success: true; data: T };
 
-type FileWriteResult = { success: true } | { success: false; error: unknown };
+export type FileWriteResult =
+  | { success: true }
+  | { success: false; error: unknown };
 
 interface ReadDirOptions {
   /**
