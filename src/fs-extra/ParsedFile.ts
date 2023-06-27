@@ -23,15 +23,24 @@ interface FileParserOptions<T> {
    * @example [".yml", ".yaml"]
    */
   extensions?: string | string[];
+  /**
+   * Enable caching of write result or previous reads
+   */
+  cache?: boolean;
 }
 
 export type FileParserResult<T> =
   | { success: false; error: unknown }
-  | { success: true; data: T };
+  | { success: true; data: T; cacheTime?: number };
 
 export type FileWriteResult =
   | { success: true }
   | { success: false; error: unknown };
+
+interface FileCache<T> {
+  data: T;
+  cacheTime: number;
+}
 
 interface ReadDirOptions {
   /**
@@ -59,6 +68,8 @@ export class ParsedFile<T> {
   readonly stringify?: Stringify<T>;
   readonly limitPath?: string;
   readonly extensions?: string[];
+  readonly usesCache: boolean;
+  private cache = new Map<string, FileCache<T>>();
 
   /**
    * Create new ParsedFile instance. To enable reading and parsing files provide
@@ -78,6 +89,7 @@ export class ParsedFile<T> {
         ? options.extensions
         : [options.extensions];
     }
+    this.usesCache = Boolean(options.cache);
   }
 
   /**
@@ -114,9 +126,23 @@ export class ParsedFile<T> {
         );
       }
 
+      // attempt to recover file from cache
+      if (this.usesCache) {
+        const cached = this.cache.get(fullPath);
+        if (cached) return Object.assign({ success: true as const }, cached);
+      }
+
       // read and parse file
       const fileContent = await fs.readFile(fullPath, "utf-8");
-      return { success: true, data: await this.parse(fileContent) };
+      const data = await this.parse(fileContent);
+
+      // return immediatly if caching disabled
+      if (!this.usesCache) return { success: true, data };
+
+      // set cache and return with cacheTime
+      const cached = { data, cacheTime: Date.now() };
+      this.cache.set(fullPath, cached);
+      return Object.assign({ success: true as const }, cached);
     } catch (error: unknown) {
       {
         return { success: false, error };
@@ -171,6 +197,12 @@ export class ParsedFile<T> {
 
       // write File
       await fs.writeFile(fullPath, fileContent, "utf-8");
+
+      // set cache if enabled
+      if (this.usesCache) {
+        this.cache.set(fullPath, { data, cacheTime: Date.now() });
+      }
+
       return { success: true };
     } catch (error: unknown) {
       return { success: false, error };
@@ -242,5 +274,13 @@ export class ParsedFile<T> {
     }
 
     return result;
+  }
+
+  /**
+   * Destroys memory cache, forcing files to be re-read from file system on next
+   * `readFile` or `readDir`.
+   */
+  resetCache() {
+    this.cache = new Map();
   }
 }
