@@ -1,1 +1,1 @@
-export { ParsedFile } from "./ParsedFile";
+export * from "./ParsedFile";
