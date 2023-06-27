@@ -1,6 +1,6 @@
 {
   "name": "@foxkit/node-util",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Node.js Utility Modules",
   "keywords": [
     "fs",
