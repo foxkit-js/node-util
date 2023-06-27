@@ -60,6 +60,11 @@ interface ReadDirOptions {
 type ReadDirResult<T> = Partial<Record<string, FileParserResult<T>>>;
 
 /**
+ * Error class used by ParsedFile
+ */
+export class ParsedFileError extends Error {}
+
+/**
  * Class used to create adapter for parsing specific file types. See comments on
  * FileParserOptions for more information
  */
@@ -95,13 +100,13 @@ export class ParsedFile<T> {
   /**
    * Read and parse file
    * @param filePath Path to file
-   * @returns {FileParserResult} with either the parsed data or the error that occured
+   * @returns FileParserResult with either the parsed data or the error that occured
    */
   async readFile(filePath: string): Promise<FileParserResult<T>> {
     try {
       // check that reading is supported by this parser
       if (!this.parse) {
-        throw new Error(
+        throw new ParsedFileError(
           `This ParsedFile does not support reading/parsing files and thus cannot perform read operations`
         );
       }
@@ -109,18 +114,18 @@ export class ParsedFile<T> {
       // check that file is in specified directory
       const fullPath = path.resolve(filePath);
       if (this.limitPath && !fullPath.startsWith(this.limitPath)) {
-        throw new Error(
-          `This parser is limited to '${this.limitPath}' but path '${filePath}' was given`
+        throw new ParsedFileError(
+          `This ParsedFile is limited to '${this.limitPath}' but path '${filePath}' was given`
         );
       }
 
       // check that file has supported extension
       const parsedPath = path.parse(fullPath);
       if (this.extensions && !this.extensions.includes(parsedPath.ext)) {
-        throw new Error(
+        throw new ParsedFileError(
           `File extension ${
             parsedPath.ext
-          } is not supported by this parser. Supported extensions: ${this.extensions.join(
+          } is not supported by this ParsedFile. Supported extensions: ${this.extensions.join(
             ", "
           )}`
         );
@@ -155,32 +160,32 @@ export class ParsedFile<T> {
    * was passed to the constructor!
    * @param filePath Path to file
    * @param data Data to serialize and write to file
-   * @returns {FileWriteResult}
+   * @returns FileWriteResult
    */
   async writeFile(filePath: string, data: T): Promise<FileWriteResult> {
     try {
       // check that writing is supported by this parser
       if (!this.stringify) {
-        throw new Error(
-          `This parser does not support serialization and thus cannot perform write operations`
+        throw new ParsedFileError(
+          `This ParsedFile does not support serialization and thus cannot perform write operations`
         );
       }
 
       // check that file is in specified directory
       const fullPath = path.resolve(filePath);
       if (this.limitPath && !fullPath.startsWith(this.limitPath)) {
-        throw new Error(
-          `This parser is limited to '${this.limitPath}' but path '${filePath}' was given`
+        throw new ParsedFileError(
+          `This ParsedFile is limited to '${this.limitPath}' but path '${filePath}' was given`
         );
       }
 
       // check that file has supported extension
       const parsedPath = path.parse(fullPath);
       if (this.extensions && !this.extensions.includes(parsedPath.ext)) {
-        throw new Error(
+        throw new ParsedFileError(
           `File extension ${
             parsedPath.ext
-          } is not supported by this parser. Supported extensions: ${this.extensions.join(
+          } is not supported by this ParsedFile. Supported extensions: ${this.extensions.join(
             ", "
           )}`
         );
@@ -249,8 +254,8 @@ export class ParsedFile<T> {
   ): Promise<ReadDirResult<T>> {
     // check that writing is supported by this parser
     if (!this.parse) {
-      throw new Error(
-        `This parser does not support serialization and thus cannot perform write operations`
+      throw new ParsedFileError(
+        `This ParsedFile does not support parsing and thus cannot perform read operations`
       );
     }
 
@@ -262,13 +267,8 @@ export class ParsedFile<T> {
       const fullPath = path.resolve(dirPath, file);
       if (options?.filter && !options.filter(fullPath)) continue;
       const readResult = await this.readFile(fullPath);
-      if (!readResult.success && readResult.error instanceof Error) {
-        if (
-          readResult.error.message.startsWith("This parser is limited to") ||
-          readResult.error.message.startsWith("File extension ")
-        ) {
-          continue;
-        }
+      if (!readResult.success && readResult.error instanceof ParsedFileError) {
+        continue;
       }
       result[path.join(dirPath, file)] = readResult;
     }
