@@ -3,7 +3,7 @@ import path from "path";
 import { isDirectory } from "../fs/isDirectory";
 
 type Stringify<T> = (value: T) => string;
-type Parse<T> = (value: string) => T | Promise<T>;
+type Parse<T> = (value: string, file: string) => T | Promise<T>;
 
 interface FileParserOptions<T> {
   /**
@@ -139,7 +139,7 @@ export class ParsedFile<T> {
 
       // read and parse file
       const fileContent = await fs.readFile(fullPath, "utf-8");
-      const data = await this.parse(fileContent);
+      const data = await this.parse(fileContent, fullPath);
 
       // return immediatly if caching disabled
       if (!this.usesCache) return { success: true, data };
