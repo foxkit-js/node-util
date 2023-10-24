@@ -85,7 +85,7 @@
     "esbuild": "^0.18.16",
     "eslint": "^8.45.0",
     "eslint-config-foxkit": "3.0.0-rc1",
-    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-prettier": "^9.0.0",
     "nano-staged": "^0.8.0",
     "prettier": "^3.0.0",
     "simple-git-hooks": "^2.9.0",
