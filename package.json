@@ -82,7 +82,7 @@
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@typescript-eslint/parser": "^6.1.0",
     "clean-publish": "^4.2.0",
-    "esbuild": "^0.18.16",
+    "esbuild": "^0.20.0",
     "eslint": "^8.45.0",
     "eslint-config-foxkit": "3.0.0-rc1",
     "eslint-config-prettier": "^8.8.0",
