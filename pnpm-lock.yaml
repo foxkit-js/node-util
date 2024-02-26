@@ -30,7 +30,7 @@ devDependencies:
     version: 8.45.0
   eslint-config-foxkit:
     specifier: 3.0.0-rc1
-    version: 3.0.0-rc1(@typescript-eslint/eslint-plugin@6.1.0)(@typescript-eslint/parser@6.1.0)(eslint-plugin-no-await-in-promise@1.1.5)(eslint@8.45.0)
+    version: 3.0.0-rc1(@typescript-eslint/eslint-plugin@6.1.0)(@typescript-eslint/parser@6.1.0)(eslint-plugin-no-await-in-promise@1.1.6)(eslint@8.45.0)
   eslint-config-prettier:
     specifier: ^8.8.0
     version: 8.8.0(eslint@8.45.0)
@@ -39,7 +39,7 @@ devDependencies:
     version: 0.8.0
   prettier:
     specifier: ^3.0.0
-    version: 3.0.0
+    version: 3.2.5
   simple-git-hooks:
     specifier: ^2.9.0
     version: 2.9.0
@@ -649,7 +649,7 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /eslint-config-foxkit@3.0.0-rc1(@typescript-eslint/eslint-plugin@6.1.0)(@typescript-eslint/parser@6.1.0)(eslint-plugin-no-await-in-promise@1.1.5)(eslint@8.45.0):
+  /eslint-config-foxkit@3.0.0-rc1(@typescript-eslint/eslint-plugin@6.1.0)(@typescript-eslint/parser@6.1.0)(eslint-plugin-no-await-in-promise@1.1.6)(eslint@8.45.0):
     resolution: {integrity: sha512-YRAj2BDyWlpUbtCRiwqdWOm5FpZVAZ0ir8a/jAtE8ZcdiyBct/cpvmEEcH2DDvJXgZVuPRAJk8qsrCr0zwz9yg==}
     engines: {node: '>=16'}
     peerDependencies:
@@ -676,7 +676,7 @@ packages:
       '@typescript-eslint/eslint-plugin': 6.1.0(@typescript-eslint/parser@6.1.0)(eslint@8.45.0)(typescript@5.1.6)
       '@typescript-eslint/parser': 6.1.0(eslint@8.45.0)(typescript@5.1.6)
       eslint: 8.45.0
-      eslint-plugin-no-await-in-promise: 1.1.5(eslint@8.45.0)
+      eslint-plugin-no-await-in-promise: 1.1.6(eslint@8.45.0)
       globals: 13.20.0
     dev: true
 
@@ -689,8 +689,8 @@ packages:
       eslint: 8.45.0
     dev: true
 
-  /eslint-plugin-no-await-in-promise@1.1.5(eslint@8.45.0):
-    resolution: {integrity: sha512-DsLzTfvOBvCX26Urnp5u/OI7lXDOPfoSmB0sxZbPMk+2va6QI2902CysNbSODN1lCW5VJMtMVmVu/V7HeMph5w==}
+  /eslint-plugin-no-await-in-promise@1.1.6(eslint@8.45.0):
+    resolution: {integrity: sha512-4oyWw+P63MdQdHstoELk0Z05xxt/dRxS1QRpM+JPizrFgQFtdJ+DjdhV4db0CsRHoZ/y8pneS2rG3Slio60u2w==}
     engines: {node: ^14.17.0 || ^16.0.0 || >= 18.0.0}
     peerDependencies:
       eslint: '>=7'
@@ -1122,8 +1122,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier@3.0.0:
-    resolution: {integrity: sha512-zBf5eHpwHOGPC47h0zrPyNn+eAEIdEzfywMoYn2XPi0P44Zp0tSq64rq0xAREh4auw2cJZHo9QUob+NqCQky4g==}
+  /prettier@3.2.5:
+    resolution: {integrity: sha512-3/GWa9aOC0YeD7LUfvOG2NiDyhOWRvt1k+rcKhOuYnMY24iiCphgneUfJDyFXd6rZCAnuLBv6UeAULtrhT/F4A==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
