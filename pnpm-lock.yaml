@@ -12,7 +12,7 @@ dependencies:
 devDependencies:
   '@types/node':
     specifier: ^20.4.4
-    version: 20.4.4
+    version: 20.11.20
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.1.0
     version: 6.1.0(@typescript-eslint/parser@6.1.0)(eslint@8.45.0)(typescript@5.1.6)
@@ -30,7 +30,7 @@ devDependencies:
     version: 8.45.0
   eslint-config-foxkit:
     specifier: 3.0.0-rc1
-    version: 3.0.0-rc1(@typescript-eslint/eslint-plugin@6.1.0)(@typescript-eslint/parser@6.1.0)(eslint-plugin-no-await-in-promise@1.1.5)(eslint@8.45.0)
+    version: 3.0.0-rc1(@typescript-eslint/eslint-plugin@6.1.0)(@typescript-eslint/parser@6.1.0)(eslint-plugin-no-await-in-promise@1.1.6)(eslint@8.45.0)
   eslint-config-prettier:
     specifier: ^8.8.0
     version: 8.8.0(eslint@8.45.0)
@@ -334,8 +334,10 @@ packages:
     resolution: {integrity: sha512-Hr5Jfhc9eYOQNPYO5WLDq/n4jqijdHNlDXjuAQkkt+mWdQR+XJToOHrsD4cPaMXpn6KO7y2+wM8AZEs8VpBLVA==}
     dev: true
 
-  /@types/node@20.4.4:
-    resolution: {integrity: sha512-CukZhumInROvLq3+b5gLev+vgpsIqC2D0deQr/yS1WnxvmYLlJXZpaQrQiseMY+6xusl79E04UjWoqyr+t1/Ew==}
+  /@types/node@20.11.20:
+    resolution: {integrity: sha512-7/rR21OS+fq8IyHTgtLkDK949uzsa6n8BkziAKtPVpugIkO6D+/ooXMvzXxDnZrmtXVfjb1bKQafYpb8s89LOg==}
+    dependencies:
+      undici-types: 5.26.5
     dev: true
 
   /@types/semver@7.5.0:
@@ -649,7 +651,7 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /eslint-config-foxkit@3.0.0-rc1(@typescript-eslint/eslint-plugin@6.1.0)(@typescript-eslint/parser@6.1.0)(eslint-plugin-no-await-in-promise@1.1.5)(eslint@8.45.0):
+  /eslint-config-foxkit@3.0.0-rc1(@typescript-eslint/eslint-plugin@6.1.0)(@typescript-eslint/parser@6.1.0)(eslint-plugin-no-await-in-promise@1.1.6)(eslint@8.45.0):
     resolution: {integrity: sha512-YRAj2BDyWlpUbtCRiwqdWOm5FpZVAZ0ir8a/jAtE8ZcdiyBct/cpvmEEcH2DDvJXgZVuPRAJk8qsrCr0zwz9yg==}
     engines: {node: '>=16'}
     peerDependencies:
@@ -676,7 +678,7 @@ packages:
       '@typescript-eslint/eslint-plugin': 6.1.0(@typescript-eslint/parser@6.1.0)(eslint@8.45.0)(typescript@5.1.6)
       '@typescript-eslint/parser': 6.1.0(eslint@8.45.0)(typescript@5.1.6)
       eslint: 8.45.0
-      eslint-plugin-no-await-in-promise: 1.1.5(eslint@8.45.0)
+      eslint-plugin-no-await-in-promise: 1.1.6(eslint@8.45.0)
       globals: 13.20.0
     dev: true
 
@@ -689,8 +691,8 @@ packages:
       eslint: 8.45.0
     dev: true
 
-  /eslint-plugin-no-await-in-promise@1.1.5(eslint@8.45.0):
-    resolution: {integrity: sha512-DsLzTfvOBvCX26Urnp5u/OI7lXDOPfoSmB0sxZbPMk+2va6QI2902CysNbSODN1lCW5VJMtMVmVu/V7HeMph5w==}
+  /eslint-plugin-no-await-in-promise@1.1.6(eslint@8.45.0):
+    resolution: {integrity: sha512-4oyWw+P63MdQdHstoELk0Z05xxt/dRxS1QRpM+JPizrFgQFtdJ+DjdhV4db0CsRHoZ/y8pneS2rG3Slio60u2w==}
     engines: {node: ^14.17.0 || ^16.0.0 || >= 18.0.0}
     peerDependencies:
       eslint: '>=7'
@@ -1246,6 +1248,10 @@ packages:
     resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
     engines: {node: '>=14.17'}
     hasBin: true
+    dev: true
+
+  /undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
     dev: true
 
   /uri-js@4.4.1:
